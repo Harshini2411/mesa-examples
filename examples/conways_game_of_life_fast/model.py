@@ -1,7 +1,7 @@
 import numpy as np
 from mesa import Model
 from mesa.datacollection import DataCollector
-from mesa.discrete_space import OrthogonalMooreGrid, PropertyLayer
+from mesa.discrete_space import OrthogonalMooreGrid
 from scipy.signal import convolve2d
 
 
@@ -38,16 +38,22 @@ class GameOfLifeModel(Model):
                            [1, 0, 1],
                            [1, 1, 1]])
 
+        # Count neighbors using convolution.
+        # boundary="wrap" ensures the grid wraps around (toroidal surface).
         neighbor_count = convolve2d(
             self.cell_layer.data, kernel, mode="same", boundary="wrap"
         )
 
+        # Apply Game of Life rules:
+        # 1. A live cell with 2 or 3 live neighbors survives, otherwise it dies.
+        # 2. A dead cell with exactly 3 live neighbors becomes alive.
         self.cell_layer.data = np.logical_or(
             np.logical_and(self.cell_layer.data,
                            np.logical_or(neighbor_count == 2, neighbor_count == 3)),
             np.logical_and(~self.cell_layer.data, neighbor_count == 3)
         )
 
+        # Metrics
         self.alive_count = np.sum(self.cell_layer.data)
         self.alive_fraction = self.alive_count / self.cells
         self.datacollector.collect(self)
