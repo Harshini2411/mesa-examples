@@ -18,13 +18,35 @@ def make_grid_component():
         plt.tight_layout()
         solara.FigureMatplotlib(fig)
         plt.close(fig)
+
     return GridComponent
 
 
 model_params = {
-    "width": {"type": "SliderInt", "value": 30, "label": "Width", "min": 5, "max": 60, "step": 1},
-    "height": {"type": "SliderInt", "value": 30, "label": "Height", "min": 5, "max": 60, "step": 1},
-    "alive_fraction": {"type": "SliderFloat", "value": 0.2, "label": "Cells alive", "min": 0, "max": 1, "step": 0.01},
+    "width": {
+        "type": "SliderInt",
+        "value": 30,
+        "label": "Width",
+        "min": 5,
+        "max": 60,
+        "step": 1,
+    },
+    "height": {
+        "type": "SliderInt",
+        "value": 30,
+        "label": "Height",
+        "min": 5,
+        "max": 60,
+        "step": 1,
+    },
+    "alive_fraction": {
+        "type": "SliderFloat",
+        "value": 0.2,
+        "label": "Cells alive",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+    },
 }
 
 gol = GameOfLifeModel()

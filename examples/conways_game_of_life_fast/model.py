@@ -11,13 +11,13 @@ class GameOfLifeModel(Model):
 
         # Create grid and attach PropertyLayer to it
         self.grid = OrthogonalMooreGrid((width, height), torus=True, random=self.random)
-        self.cell_layer = self.grid.create_property_layer("cell_layer", default_value=False, dtype=bool)
+        self.cell_layer = self.grid.create_property_layer(
+            "cell_layer", default_value=False, dtype=bool
+        )
 
         # Randomly set cells to alive
         self.cell_layer.data = np.random.choice(
-            [True, False],
-            size=(width, height),
-            p=[alive_fraction, 1 - alive_fraction]
+            [True, False], size=(width, height), p=[alive_fraction, 1 - alive_fraction]
         )
 
         # Metrics
@@ -34,9 +34,7 @@ class GameOfLifeModel(Model):
         self.datacollector.collect(self)
 
     def step(self):
-        kernel = np.array([[1, 1, 1],
-                           [1, 0, 1],
-                           [1, 1, 1]])
+        kernel = np.array([[1, 1, 1], [1, 0, 1], [1, 1, 1]])
 
         # Count neighbors using convolution.
         # boundary="wrap" ensures the grid wraps around (toroidal surface).
@@ -48,9 +46,11 @@ class GameOfLifeModel(Model):
         # 1. A live cell with 2 or 3 live neighbors survives, otherwise it dies.
         # 2. A dead cell with exactly 3 live neighbors becomes alive.
         self.cell_layer.data = np.logical_or(
-            np.logical_and(self.cell_layer.data,
-                           np.logical_or(neighbor_count == 2, neighbor_count == 3)),
-            np.logical_and(~self.cell_layer.data, neighbor_count == 3)
+            np.logical_and(
+                self.cell_layer.data,
+                np.logical_or(neighbor_count == 2, neighbor_count == 3),
+            ),
+            np.logical_and(~self.cell_layer.data, neighbor_count == 3),
         )
 
         # Metrics
