@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
+from agent import AntState
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 from mesa.visualization import SolaraViz, make_space_component
 from mesa.visualization.components import PropertyLayerStyle
-
-from agent import AntState
 from model import AntForaging
 
 plt.rcParams["figure.figsize"] = (10, 10)
