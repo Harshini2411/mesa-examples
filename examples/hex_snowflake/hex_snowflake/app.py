@@ -1,7 +1,6 @@
-from mesa.visualization import SolaraViz, make_space_component
-
-from hex_snowflake.model import HexSnowflake
 from hex_snowflake.cell import Cell
+from hex_snowflake.model import HexSnowflake
+from mesa.visualization import SolaraViz, make_space_component
 
 
 def agent_portrayal(agent):
