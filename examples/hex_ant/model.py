@@ -1,5 +1,5 @@
 import mesa
-from agent import Ant
+from .agent import Ant
 from mesa.discrete_space import HexGrid
 
 
