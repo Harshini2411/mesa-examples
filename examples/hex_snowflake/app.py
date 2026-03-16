@@ -1,5 +1,5 @@
-from hex_snowflake.cell import Cell
-from hex_snowflake.model import HexSnowflake
+from cell import Cell
+from model import HexSnowflake
 from mesa.visualization import SolaraViz, make_space_component
 
 
