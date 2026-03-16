@@ -1,6 +1,6 @@
 from cell import Cell
-from model import HexSnowflake
 from mesa.visualization import SolaraViz, make_space_component
+from model import HexSnowflake
 
 
 def agent_portrayal(agent):
