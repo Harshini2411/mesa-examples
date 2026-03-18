@@ -1,6 +1,7 @@
 import mesa
-from cell import Cell
 from mesa.discrete_space import HexGrid
+
+from .cell import Cell
 
 
 class HexSnowflake(mesa.Model):
@@ -33,3 +34,4 @@ class HexSnowflake(mesa.Model):
         """
         self.agents.do("determine_state")
         self.agents.do("assume_state")
+
